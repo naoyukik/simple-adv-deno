@@ -1,0 +1,5 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Deno: C/novelTest.ts" type="NodeJSConfigurationType" folderName="Deno: Test" path-to-node="wsl://PENGWIN@/home/dstri/.deno/bin/deno" node-parameters="test" path-to-js-file="tests/controllers/novelTest.ts" working-dir="$PROJECT_DIR$">
+    <method v="2" />
+  </configuration>
+</component>

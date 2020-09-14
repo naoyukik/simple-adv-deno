@@ -1,0 +1,5 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="main" type="DenoConfigurationType" exePath="$USER_HOME$/.deno/bin/deno.exe" inputPath="$PROJECT_DIR$/main.ts" programParameters="run">
+    <method v="2" />
+  </configuration>
+</component>
