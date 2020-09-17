@@ -1,8 +1,10 @@
 import { Novel as NovelModel } from "../models/novel.ts";
+import { stdout } from "../main.ts";
 
 export class Novel {
-  public async index() {
+  public index() {
     const title = "Simple Dream Novel\nリスト";
-    await Deno.stdout.write(new TextEncoder().encode(title));
+    stdout(title);
+    // await Deno.stdout.write(new TextEncoder().encode(title));
   }
 }
