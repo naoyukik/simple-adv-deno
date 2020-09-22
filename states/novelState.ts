@@ -1,4 +1,5 @@
 export interface NovelStateItem {
+  id: string;
   title: string;
   contents: Array<string>;
 }
@@ -10,6 +11,7 @@ export class NovelState {
    */
   private static NovelStateItems: Array<NovelStateItem> = [
     {
+      id: "n1",
       title: "夏の終わり",
       contents: [
         "夏の終わり、{{iam}}は{{she}}に出会った。",
@@ -18,11 +20,13 @@ export class NovelState {
       ],
     },
     {
+      id: "n2",
       title: "それから……",
       contents: [
         "それから、10年経って{{iam}}は{{she}}に再び出会った。",
-        "出会って一ヶ月が経つ頃には、{{iam}}は{{she}}を忘れられなくなった。",
-        "{{she}}は「さよなら、またね」<br>と{{iam}}に告げた。",
+        "再会してすぐ、{{iam}}は{{she}}を忘れられなくなった。",
+        "再会してすぐ、{{she}}は{{iam}}を忘れられなくなった。",
+        "{{iam}}は「ぼくは、結婚してしまったよ」<br>と{{she}}に告げた。",
       ],
     },
   ];

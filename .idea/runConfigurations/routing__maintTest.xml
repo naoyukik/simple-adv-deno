@@ -1,0 +1,5 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="routing: maintTest" type="DenoConfigurationType" exePath="$USER_HOME$/.deno/bin/deno.exe" inputPath="$PROJECT_DIR$/tests/mainTest.ts" programParameters="test --filter &quot;routing&quot;">
+    <method v="2" />
+  </configuration>
+</component>

@@ -1,8 +1,8 @@
 import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
 
-import { question, routes } from "../main.ts";
+import { parseRoutePath, question, routes, routing } from "../main.ts";
 
-Deno.test("qustion test", async () => {
+Deno.test("question test", async () => {
   const questionResult: string | undefined = await question(
     { body: "TestBody: " },
   );
@@ -19,6 +19,11 @@ Deno.test("get Route List", () => {
   // assertEquals("title" in novelModel.novel, true);
 });
 
-// Deno.test("routing", () => {
-//   routing({ route: "index" });
-// });
+Deno.test("routing", () => {
+  routing("index");
+  assertEquals(true, true);
+});
+
+Deno.test("parseRoutePath", () => {
+  parseRoutePath("n1");
+});
