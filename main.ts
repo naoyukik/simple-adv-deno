@@ -3,17 +3,21 @@ import { Novel } from "./controllers/novel.ts";
 
 interface RouteParam {
   route: string;
-  controller: (page: any) => string;
+  controller: (page: any) => string | undefined;
 }
 
 /**
  * 設問
  * @param params
+ * @param params.body
  * @return Promise<string | undefined>
  */
 export async function question(
-  params: { body: string },
+  params: { body: string | undefined },
 ): Promise<string | undefined> {
+  if (params.body === undefined) {
+    throw new Error("body undefined");
+  }
   await stdout(params.body);
 
   for await (const line of readLines(Deno.stdin)) {
@@ -46,6 +50,12 @@ export function routes() {
         return novelController.page(route);
       },
     },
+    {
+      route: "n{string}",
+      controller: (route) => {
+        return novelController.page(route);
+      },
+    },
   ];
 
   return route;
@@ -59,12 +69,16 @@ let previousRoutePath = "index";
  * @param routePath routes()関数内部で設定した"route"の値
  */
 export function routing(routePath: string) {
+  if (routePath === "exit") {
+    Novel.exit();
+    return true;
+  }
   const route = getRoute(routePath);
   if (route.length <= 0) {
     // 選択肢が存在しなかったら同じrouteを無限ループ
     routing(previousRoutePath);
   }
-  const content: string = route[0].controller(routePath);
+  const content: string | undefined = route[0].controller(routePath);
   question({ body: content }).then(
     (result) => {
       if (result !== undefined) {
@@ -72,38 +86,43 @@ export function routing(routePath: string) {
         routing(result);
       }
     },
-  );
+  ).catch(() => {
+    routing(previousRoutePath);
+  });
   return true;
 }
 
 /**
- * @param routePath
+ * @param {string} routePath
  * @returns RouteParam[]
  */
 function getRoute(routePath: string) {
   const routeList: RouteParam[] = routes();
   return routeList.filter(function (item, index) {
     if (item["route"] === routePath) return true;
-    if (item["route"] === parseRoutePath(routePath)) return true;
+    if (item["route"] === setRoutePathType(routePath)) return true;
   });
 }
 
-export function parseRoutePath(routePath: string) {
-  let suffixNum: number = 0;
-  // n1 -> n,numberに分割する
-  const prefix: string = routePath.substring(0, 1);
-  const suffix: string = routePath.substring(1);
-  if (suffix === undefined) {
-    suffixNum = Number(suffix);
+/**
+ *
+ * @param {string} routePath
+ */
+export function setRoutePathType(routePath: string) {
+  let categoryId: string = "",
+    subIdStr: string = "",
+    contentId: number = 0;
+  const parsePagePaths = Novel.parsePagePath(routePath);
+  if (parsePagePaths !== null) {
+    [, categoryId, subIdStr] = parsePagePaths;
   }
-  const suffixType: string = typeof suffixNum;
-  return `${prefix}{${suffixType}}`;
+  contentId = Number(subIdStr);
+  const contentIdType: string = typeof contentId;
+  return `${categoryId}{${contentIdType}}`;
 }
-
-routing(previousRoutePath);
-// const answer = await question({ body: "Name?: " });
-// console.log(answer);
 
 export async function stdout(str: string) {
   await Deno.stdout.write(new TextEncoder().encode(str));
 }
+
+routing(previousRoutePath);

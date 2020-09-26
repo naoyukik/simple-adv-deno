@@ -1,6 +1,6 @@
 import { assertEquals } from "https://deno.land/std/testing/asserts.ts";
 
-import { parseRoutePath, question, routes, routing } from "../main.ts";
+import { setRoutePathType, question, routes, routing } from "../main.ts";
 
 Deno.test("question test", async () => {
   const questionResult: string | undefined = await question(
@@ -25,5 +25,5 @@ Deno.test("routing", () => {
 });
 
 Deno.test("parseRoutePath", () => {
-  parseRoutePath("n1");
+  setRoutePathType("n1");
 });

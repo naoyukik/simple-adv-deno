@@ -14,9 +14,9 @@ export class NovelState {
       id: "n1",
       title: "夏の終わり",
       contents: [
-        "夏の終わり、{{iam}}は{{she}}に出会った。",
-        "出会って一ヶ月が経つ頃には、{{iam}}は{{she}}を忘れられなくなった。",
-        "{{she}}は「さよなら、またね」<br>と{{iam}}に告げた。",
+        "夏の終わり、{{iam}}は{{she}}に出会った。\n\nSelect\nNext[n11]",
+        "出会って一ヶ月が経つ頃には、{{iam}}は{{she}}を忘れられなくなった。\nNext[n12]",
+        "{{she}}は「さよなら、またね」<br>と{{iam}}に告げた。\nEnd\nIndex[novelIndex]",
       ],
     },
     {
