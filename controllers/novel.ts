@@ -33,7 +33,7 @@ export class Novel {
 
   public novelIndex(): string {
     const content =
-      "Simple Dream Novel\nリスト\n\n第1話 夏の終わり[n10]\n第2話 それは誰が決めるのか(公開日未定)\ninput:";
+      "Simple Dream Novel\nリスト\n\n第1話 夏の終わり[n10]\n第2話 それから……[n20]\ninput:";
     return content;
   }
 
